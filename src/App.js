@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import SignInSignUp from "./page/SignInSignUp";
+import { ToastContainer } from "react-toastify"
+import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 
-function App() {
+import "./index.scss"
+import "./components/Modal/BasicModal/BasicModal.scss"
+import "./components/SignUpForm/SignUpForm.scss"
+
+export default function App() {
+  const [user, setUser] = useState({name: "Cristian"});
+  
+  const client = new ApolloClient({
+    uri: "http://localhost:5000/graphql",
+    cache: new InMemoryCache()
+  });
+
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  <ApolloProvider client={client} >
+    <div>{user ? (
+    <div>
+      <SignInSignUp/>
     </div>
+  ) : <h1>No lo estas</h1>}
+  <ToastContainer 
+  position="top-right"
+  autoClose={5000}
+  hideProgressBar
+  newestOnTop={false}
+  closeOnClick
+  rtl={false}
+  pauseOnVisibilityChange
+  draggable
+  pauseOnHover
+  />
+  </div>
+  </ApolloProvider>
+
   );
+    
 }
 
-export default App;
+
