@@ -52,6 +52,8 @@ export default function SignUpForm(props) {
                 setsignUpLoading(loading);
                 mutateFunction({variables: {usuario:{nombre:formData.nombre, apellidos:formData.apellidos, email:formData.email, password:formData.password}}});
                 toast.success("Formulario hecho")
+                setShowModal(false);
+                setFormData(initialFormValue());
             }
         }
     };

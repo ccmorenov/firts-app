@@ -1,0 +1,21 @@
+@import "../../scss/index.scss";
+
+.basic-layout{
+    &__menu {
+        background-color: #192734;
+        padding-right:  0 !important;
+    }
+    h2{
+        color:aqua;
+    }
+
+    &__content {
+        background-color: #192734 !important;
+        width: 700px !important;    
+        height: 100vh;
+        overflow-y: scroll;
+        padding: 0 !important;
+        border-right: 2px solid $border-grey;
+        scrollbar-width: none;
+    }     
+}

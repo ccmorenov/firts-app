@@ -5,11 +5,13 @@ import { faSearch, faUsers, faComment} from "@fortawesome/free-solid-svg-icons";
 
 import BasicModal from '../../components/Modal/BasicModal';
 import SignUpForm from '../../components/SignUpForm';
+import SignInForm from '../../components/SignInForm';
 import headphonescrop from '../../assets/jpeg/headphonescrop.png';
 import redheadfin from '../../assets/jpeg/redheadfin.png';
 import "./SignInSignUp.scss";
 
-export default function SignInSignUp() {
+export default function SignInSignUp(props) {
+    const { setRefreshCheckLogin} = props;
     const [showModal, setShowModal] = useState(false);
     const [contentModal, setContentModal] = useState (null);
     const openModal = content => {
@@ -22,7 +24,11 @@ export default function SignInSignUp() {
         <Container className='signin-signup' fluid>
             <Row>
                 <LeftComponent />
-                <RightComponent openModal={openModal} setShowModal={setShowModal}/>
+                <RightComponent 
+                openModal={openModal} 
+                setShowModal={setShowModal}
+                setRefreshCheckLogin={setRefreshCheckLogin}
+                />
             </Row>
         </Container>
         <BasicModal show={showModal} setShow={setShowModal}>
@@ -53,10 +59,9 @@ function LeftComponent() {
     );
 }    
 function RightComponent(props) {
-    const {openModal,setShowModal}= props;
-
+    const {openModal,setShowModal, setRefreshCheckLogin}= props;
     return (
-        <Col className='signin-signup__right' xs={6}>
+        <Col    className='signin-signup__right' xs={6}>
             <div>
                 <img src={redheadfin} alt="Sounds" />
                 <h2>Escucha lo que esta sonando en el mundo en este momento</h2>
@@ -68,8 +73,11 @@ function RightComponent(props) {
                 </Button>
                 <Button 
                 variant='outline-primary'
-                onClick={()=> openModal(<h2>Formulario de login</h2>)}
-                >Iniciar Sesión</Button>
+                onClick={()=> openModal(
+                <SignInForm setRefreshCheckLogin={setRefreshCheckLogin}/>
+                )}>
+                Iniciar Sesión
+                </Button>
             </div>
         </Col>
     );    
