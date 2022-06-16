@@ -7,7 +7,7 @@ import BasicModal from '../../components/Modal/BasicModal';
 import SignUpForm from '../../components/SignUpForm';
 import SignInForm from '../../components/SignInForm';
 import headphonescrop from '../../assets/jpeg/headphonescrop.png';
-import redheadfin from '../../assets/jpeg/redheadfin.png';
+import redheadfin from '../../assets/jpeg/headphoneswhite.png';
 import "./SignInSignUp.scss";
 
 export default function SignInSignUp(props) {

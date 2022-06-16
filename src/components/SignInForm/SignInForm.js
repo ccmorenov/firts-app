@@ -9,7 +9,7 @@ import { setTokenApi, getTokenApi} from "../../api/auth"
 import "./SignInForm.scss";
 
 const LOGIN_USER = gql`
-  mutation loginUser($usuario: UserLogin!) {
+  mutation loginUser($usuario: UserRegister!) {
     loginUser(usuario: $usuario) {
       token
     }
@@ -24,10 +24,11 @@ export default function SignInForm(props) {
  
     const onSubmit = e => {
       e.preventDefault();
-
+      
       let validCount =0;
       values(formData).some((value) =>{
         value && validCount++;
+        console.log(formData)
         return null;
       });
 
@@ -37,12 +38,13 @@ export default function SignInForm(props) {
         if(!isEmailValid(formData.email)) {
           toast.warning("Email es invalido");
         } else {
+          
           setSignInLoading(loading);
           mutateFunction({variables: {usuario:{email:formData.email, password:formData.password}}})
-          .then(data =>{
+          .then(data =>{  
             setTokenApi(data.data.loginUser.token);
+            toast.success("Sesion iniciada");
             setRefreshCheckLogin(true);
-            toast.success("Sesion iniciada")
           })
         }
       }
@@ -74,7 +76,6 @@ export default function SignInForm(props) {
           <Button variant="primary" type="submit" >
               {!signInLoading ? "Iniciar sesion" : <Spinner animation="border" />}
           </Button>
-
       </Form>
     </div>
   );

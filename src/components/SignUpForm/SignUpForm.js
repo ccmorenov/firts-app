@@ -8,7 +8,7 @@ import { useMutation, gql } from "@apollo/client";
 import "./SignUpForm.scss";
 
 const REGISTER_USER = gql`
-  mutation registerUser($usuario: UserRegister!) {
+  mutation registerUser($usuario: Register!) {
     createUser(usuario: $usuario) {
       nombre
       apellidos
@@ -30,7 +30,6 @@ export default function SignUpForm(props) {
 
     const onSubmit = e => {
         e.preventDefault();
-        console.log(formData);
 
         let validCount=0;
 
@@ -43,6 +42,7 @@ export default function SignUpForm(props) {
             toast.warning("Completa todos los campos del formulario");
         } else {
             if(!isEmailValid(formData.email)){
+                console.log(formData.email);
                 toast.warning("Email invalido")
             } else if(formData.password!==formData.repeatPassword){
                 toast.warning("Las contraseñas deben ser iguales")

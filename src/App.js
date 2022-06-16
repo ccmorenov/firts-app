@@ -24,7 +24,7 @@ export default function App() {
   if (!loadUser) return null;
   
   const  client= new ApolloClient({
-    uri: "http://localhost:5000/graphql",
+    uri: "https://sounds-ag-z5fiut5qsa-uc.a.run.app",
     cache: new InMemoryCache()
   });
 

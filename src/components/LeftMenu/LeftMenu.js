@@ -14,8 +14,8 @@ export default function LeftMenu(props) {
   const user = useAuth();
 
   const logout = () => {
-    logoutApi();
     setRefreshCheckLogin(true);
+    logoutApi();
   }
 
   return (
@@ -30,19 +30,22 @@ export default function LeftMenu(props) {
       <Link to={`/${user?._id}`}>
         <FontAwesomeIcon icon={faUser} /> Perfil
       </Link>
-      <Link to="/musica">
+      <Link to="/Music">
         <FontAwesomeIcon icon={faMusic} /> Musica
       </Link>
       <Link to="" onClick={logout}>
         <FontAwesomeIcon icon={faPowerOff} /> Salir
       </Link>
 
-      <Button>
+      <Button className="upload">
           Upload music
       </Button>
-      <Button>
-          Aleatorio
-      </Button>
+      <Link to="/PlayMusic">
+        <Button className="aleatorio">
+            Aleatorio
+        </Button>
+          
+      </Link>
     </div>
   )
 }
