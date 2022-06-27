@@ -23,6 +23,7 @@ export default function Home(props) {
 
   let state = { content: 'Play', iconCss: 'e-btn-sb-icon e-play-icon' };
   const   data = useQuery(GET_MUSIC)
+    console.log(data)
     if (data.loading) 
     return <h2>Wait...</h2>
     if (data.error) 

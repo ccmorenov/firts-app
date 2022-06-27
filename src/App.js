@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SignInSignUp from "./page/SignInSignUp";
 import { ToastContainer } from "react-toastify"
-import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloProvider, ApolloClient, InMemoryCache, HttpLink} from "@apollo/client";
 import { AuthContext } from "./utils/context";
 import { isUserLoguedApi } from "./api/auth"
 import Routing from "./routes/Routing"
@@ -24,7 +24,12 @@ export default function App() {
   if (!loadUser) return null;
   
   const  client= new ApolloClient({
-    uri: "https://sounds-ag-z5fiut5qsa-uc.a.run.app",
+    link: new HttpLink({
+      uri: "https://sounds-proxy-z5fiut5qsa-uc.a.run.app/graphql",
+      fetchOptions: {
+        mode: 'no-cors',
+      },
+    }),  
     cache: new InMemoryCache()
   });
 
